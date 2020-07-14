@@ -46,26 +46,18 @@ filename = sys.argv[1]
 def wordcount(filename):
     """ prints how many times each space-separated word occurs in a file """
 
-    word_count = {}
     punctuation = (',', '.', '?', '!')
 
     def unpunctuate(word):
         """ removes punctuation from word """
 
         if word.endswith(punctuation):
-            word_letters = [letter for letter in word if letter not in punctuation]
-            # for letter in word:
-            #     if letter not in punctuation:
-            #         word_letters.append(letter)
-            word = ''.join(word_letters)
+            word = word[:-1]
         return word
     
     file_object = open(filename)
-    for lines in file_object:
-        lines = file_object.read().lower()
-        words = lines.rstrip("\n").split()
-        # print(words)
-        cleaned_words = [unpunctuate(word) for word in words]
+    words = file_object.read().lower().rstrip("\n").split()
+    cleaned_words = [unpunctuate(word) for word in words]
     
     for key, value in Counter(cleaned_words).items():
         print(key, value)

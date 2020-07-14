@@ -50,52 +50,26 @@ def wordcount(filename):
     punctuation = (',', '.', '?', '!')
 
     def unpunctuate(word):
-        
-        word_letters = []
+        """ removes punctuation from word """
+
         if word.endswith(punctuation):
-            word_letters = []
-            for letter in word:
-                if letter not in punctuation:
-                    word_letters.append(letter)
+            word_letters = [letter for letter in word if letter not in punctuation]
+            # for letter in word:
+            #     if letter not in punctuation:
+            #         word_letters.append(letter)
             word = ''.join(word_letters)
         return word
     
     file_object = open(filename)
     for lines in file_object:
         lines = file_object.read().lower()
-        words_with_spaces = lines.replace('\n', ' ')
-        words = words_with_spaces.split(' ')
+        words = lines.rstrip("\n").split()
+        # print(words)
         cleaned_words = [unpunctuate(word) for word in words]
     
     for key, value in Counter(cleaned_words).items():
         print(key, value)
         
-            
-    #     words = line.rstrip().split(' ')
-
-    #     for word in words:
-    #         word.lower()
-    #         word = unpunctuate(word)
-
-    #         word_count[word] = word_count.get(word, 0) + 1
-        
-
-    # for key, value in word_count.items():
-    #     print(key, value)
-
-    # for line in file_object.read():
-    #     words = line.rstrip().split(' ')
-    #     for word in words:
-    #         word = word.lower()
-    #         word = unpunctuate(word)
-                        
-    #         word_count[word] = word_count.get(word, 0) + 1
-
-    # for key, value in word_count.items():
-    #     print(key, value)
-
-    
-
 
 wordcount(filename)
 

@@ -57,9 +57,9 @@ def wordcount(filename):
     
     file_object = open(filename)
     words = file_object.read().lower().rstrip("\n").split()
-    cleaned_words = [unpunctuate(word) for word in words]
+    # cleaned_words = [unpunctuate(word) for word in words]
     
-    for key, value in Counter(cleaned_words).items():
+    for key, value in Counter([unpunctuate(word) for word in words]).items():
         print(key, value)
         
 
